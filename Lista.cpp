@@ -4,8 +4,8 @@
 
 Lista::Lista()
 {
-    fim = NULL;		//aponta para o ultimo
-    lista = NULL;	//aponta para o primeiro
+    fim = nullptr;		//aponta para o ultimo
+    lista = nullptr;	//aponta para o primeiro
     numnos = 0;		//numero de nos
 }
 
@@ -13,15 +13,25 @@ Lista::~Lista()
 {
     if (lista == fim)
     {
-        this->Remove();
+        --numnos;
+        No * rem = fim;
+        fim = nullptr;
+        lista = nullptr;
+        delete rem;
     }
     else
     {
-        this->Remove(1);
+        No * rem = lista;
+        fim->prox = lista->prox;
+        rem->prox = nullptr;
+        --numnos;
+        delete rem;
+        this->~Lista();
+        return;
     }
 }
 
-TipoDado Lista::Remove()
+TipoDado Lista::RemoveLastElement()
 {
     if (!Vazia())
     {
@@ -85,12 +95,12 @@ TipoDado Lista::Remove(TipoDado m)
             lista = lista->prox;
             fim->prox = lista;
             std::cout << "O valor a ser deletado eh: " << rem->info << std::endl;
-            rem->prox = NULL;
+            rem->prox = nullptr;
             delete rem;
             --numnos;
         }
         std::cout << "O valor sorteado eh: " << lista->info << std::endl;
-        lista->prox = NULL;
+//        lista->prox = NULL;
         return lista->info;
     }
 }
@@ -113,5 +123,5 @@ unsigned int Lista::Tam()
 
 bool Lista::Vazia()
 {
-    return lista == NULL;
+    return lista == nullptr;
 }

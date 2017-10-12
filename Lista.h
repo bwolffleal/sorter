@@ -11,7 +11,7 @@ public:
     ~Lista();
     void Insere(TipoDado x);
     TipoDado Remove(TipoDado m);
-    TipoDado Remove();
+    TipoDado RemoveLastElement();
     bool Vazia();
     unsigned int Tam();
     void Imprime();
